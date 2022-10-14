@@ -21,13 +21,10 @@ import {
 
 import FastImageWrapper from './FastImageWrapper';
 
-import CACHE_EXPIRY from './constants';
+import {CACHE_EXPIRY, IMAGE_RESOLUTION} from './constants';
 
 const App = () => {
-  console.log(PixelRatio.get());
-  // const imageId = Math.ceil(Math.random()*100);
-
-  const ip = `` || `localhost`;
+  const ip = `192.168.29.120` || `localhost`;
 
   const sources = [
     {
@@ -89,9 +86,9 @@ const App = () => {
                 }}
                 cacheExpiry={CACHE_EXPIRY.EVERY_END_OF_DAY}
                 multipleURI={{
-                  1: sources[0].uri,
-                  2: sources[1].uri,
-                  3: sources[2].uri,
+                  [IMAGE_RESOLUTION['1x']]: sources[0].uri,
+                  [IMAGE_RESOLUTION['2x']]: sources[1].uri,
+                  [IMAGE_RESOLUTION['3x']]: sources[2].uri,
                 }}
               />
             </>

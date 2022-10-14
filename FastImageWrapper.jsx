@@ -1,18 +1,17 @@
+import React from 'react';
 import FastImage from 'react-native-fast-image';
 import PropTypes from 'prop-types';
 import {PixelRatio, Text} from 'react-native';
 import {endOfDay, endOfWeek, endOfMonth, endOfYear} from 'date-fns';
 
-import CACHE_EXPIRY from './constants';
-
-const DEFAULT_URI_INDEX = 1;
+import {CACHE_EXPIRY, IMAGE_RESOLUTION} from './constants';
 
 const getURIBasedOnDevice = multipleURI => {
   const devicePixelRatio = PixelRatio.get();
   const flooredDevicePixelRatio = Math.floor(devicePixelRatio);
-  const uri = flooredDevicePixelRatio
+  const uri = multipleURI[flooredDevicePixelRatio]
     ? multipleURI[flooredDevicePixelRatio]
-    : multipleURI[DEFAULT_URI_INDEX];
+    : multipleURI[IMAGE_RESOLUTION['1x']];
   return uri;
 };
 
@@ -42,7 +41,6 @@ const FastImageWrapper = props => {
   const {source, cacheExpiry, multipleURI} = props;
   const tempURI = multipleURI ? getURIBasedOnDevice(multipleURI) : source.uri;
   const cacheExpiryParam = getCacheExpiry(cacheExpiry);
-
   if (!tempURI) {
     return <Text> Invalid URI</Text>;
   }
@@ -61,10 +59,13 @@ const FastImageWrapper = props => {
 
 FastImageWrapper.propTypes = {
   cacheExpiry: PropTypes.string,
+  multipleURI: PropTypes.shape({}),
+  source: PropTypes.shape({}).isRequired,
 };
 
 FastImageWrapper.defaultProps = {
   cacheExpiry: CACHE_EXPIRY.NONE,
+  multipleURI: null,
 };
 
 export default FastImageWrapper;

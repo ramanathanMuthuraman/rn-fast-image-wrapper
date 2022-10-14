@@ -6,4 +6,10 @@ const CACHE_EXPIRY = {
   EVERY_END_OF_YEAR: 'EVERY_END_OF_YEAR',
 };
 
-export default CACHE_EXPIRY;
+const IMAGE_RESOLUTION = {
+  '1x': 1,
+  '2x': 2,
+  '3x': 3,
+};
+
+export {CACHE_EXPIRY, IMAGE_RESOLUTION};
