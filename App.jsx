@@ -27,7 +27,7 @@ const App = () => {
   console.log(PixelRatio.get());
   // const imageId = Math.ceil(Math.random()*100);
 
-  const ip = `192.168.29.120` || `localhost`;
+  const ip = `` || `localhost`;
 
   const sources = [
     {
@@ -88,6 +88,11 @@ const App = () => {
                   uri: sources[1].uri,
                 }}
                 cacheExpiry={CACHE_EXPIRY.EVERY_END_OF_DAY}
+                multipleURI={{
+                  1: sources[0].uri,
+                  2: sources[1].uri,
+                  3: sources[2].uri,
+                }}
               />
             </>
           )}
